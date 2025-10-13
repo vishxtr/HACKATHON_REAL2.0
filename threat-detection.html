@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartSOC  - Threat Detection</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b1220'/%3E%3Cpath d='M32 8l18 6v12c0 12-8 22-18 26C22 48 14 38 14 26V14l18-6z' fill='%236463f7'/%3E%3C/svg%3E" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/styles.css">
@@ -134,6 +141,10 @@
                 <li><a href="cases.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-fire w-5"></i><span class="truncate text-sm font-medium">Incidents</span></a></li>
                 <li><a href="threat-intel.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-brain w-5"></i><span class="truncate text-sm font-medium">Threat Intel</span></a></li>
                 <li><a href="analytics.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-chart-line w-5"></i><span class="truncate text-sm font-medium">Analytics</span></a></li>
+                <li><a href="soc-graph.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-project-diagram w-5"></i><span class="truncate text-sm font-medium">SOC Threat Graph</span></a></li>
+                <li><a href="soc-explorer.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-database w-5"></i><span class="truncate text-sm font-medium">SOC Entity Explorer</span></a></li>
+                <li><a href="soc-rules.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-list-check w-5"></i><span class="truncate text-sm font-medium">SOC Model Rules</span></a></li>
+                <li><a href="playbooks.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-diagram-project w-5"></i><span class="truncate text-sm font-medium">Automation Playbooks</span></a></li>
                 <li><a href="assets.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-users w-5"></i><span class="truncate text-sm font-medium">Users</span></a></li>
                 <li><a href="settings.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-gear w-5"></i><span class="truncate text-sm font-medium">Settings</span></a></li>
             </ul>

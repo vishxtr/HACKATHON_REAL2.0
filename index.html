@@ -350,6 +350,25 @@
                     </a>
                 </li>
                 <li>
+                    <a href="soc-graph.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors">
+                        <i class="sidebar-icon fas fa-project-diagram w-5"></i>
+                        <span class="truncate text-sm font-medium">SOC Threat Graph</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="soc-explorer.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors">
+                        <i class="sidebar-icon fas fa-database w-5"></i>
+                        <span class="truncate text-sm font-medium">SOC Entity Explorer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="soc-rules.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors">
+                        <i class="sidebar-icon fas fa-list-check w-5"></i>
+                        <span class="truncate text-sm font-medium">SOC Model Rules</span>
+                    </a>
+                </li>
+                
+                <li>
                     <a href="playbooks.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors">
                         <i class="sidebar-icon fas fa-diagram-project w-5"></i>
                         <span class="truncate text-sm font-medium">Automation Playbooks</span>
@@ -381,7 +400,7 @@
     <div id="particles-js"></div>
     <div id="main-container" class="max-w-7xl mx-auto relative z-10">
         <!-- Header -->
-        <header class="flex justify-between items-center mb-8">
+        <header class="sticky top-0 z-40 flex justify-between items-center mb-8 bg-slate-900 bg-opacity-80 backdrop-blur-sm rounded-lg p-4 border border-slate-700">
             <div class="flex items-center space-x-4">
                 <div class="flex items-center space-x-3">
                     <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
@@ -409,13 +428,29 @@
                     <a href="analytics.html" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors">
                         <i class="fas fa-chart-line mr-2"></i>Analytics
                     </a>
-                    <!-- More button removed per request -->
                     <a href="landing.html" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors">
                         <i class="fas fa-home mr-2"></i>Home
                     </a>
-                    <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </button>
+                    <div class="relative">
+                        <button id="user-menu-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-white text-xs"></i>
+                            </div>
+                            <span class="text-sm font-medium">Admin</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="user-menu" class="hidden absolute right-0 mt-2 w-48 bg-slate-800 bg-opacity-95 backdrop-blur-sm rounded-lg shadow-lg border border-slate-700 z-50">
+                            <div class="py-2">
+                                <a href="settings.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-slate-700">
+                                    <i class="fas fa-user-cog mr-3"></i>Profile Settings
+                                </a>
+                                <div class="border-t border-slate-700 my-1"></div>
+                                <button onclick="logout()" class="flex items-center w-full px-4 py-2 text-sm text-red-400 hover:bg-slate-700">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -782,6 +817,21 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // User menu dropdown
+            const userMenuBtn = document.getElementById('user-menu-btn');
+            const userMenu = document.getElementById('user-menu');
+            
+            userMenuBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userMenu?.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!userMenuBtn?.contains(e.target) && !userMenu?.contains(e.target)) {
+                    userMenu?.classList.add('hidden');
+                }
+            });
+            
             // 'More' menu removed — no wiring required
             // Toast utility
             function showToast(msg, type = 'info') {

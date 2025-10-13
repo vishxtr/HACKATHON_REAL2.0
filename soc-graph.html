@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart SOC - Threat Graph</title>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/shared-buttons.css">
+    <link rel="stylesheet" href="assets/chatbot.css">
+    <style>
+        html, body { overflow: hidden; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f0f23 0%, #1e1e3f 25%, #2d1b69 50%, #7c3aed 75%, #a855f7 100%); color: #f3f4f6; }
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; opacity: 0.6; }
+        .card { background: rgba(30,41,59,0.9); backdrop-filter: blur(15px); border: 1px solid rgba(139,92,246,0.4); border-radius: 1rem; box-shadow: 0 12px 40px rgba(139,92,246,0.2), inset 0 1px 0 rgba(255,255,255,0.1); }
+        .embed-frame { width: 100%; height: 100vh; border: none; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .vibrant-border { border-color: rgba(168,85,247,0.6); }
+        .glow-effect { box-shadow: 0 0 20px rgba(139,92,246,0.3); }
+        .metric-card { transition: all 0.3s ease; }
+        .metric-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 60px rgba(139,92,246,0.3); }
+    </style>
+</head>
+<body class="p-0">
+    <button id="sidebar-mobile-toggle" class="lg:hidden fixed top-3 left-3 z-50 inline-flex items-center justify-center rounded-md p-2 text-slate-200 bg-slate-900/90 border border-slate-800 hover:bg-slate-800 transition" aria-controls="sidebar" aria-expanded="false" aria-label="Open sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div id="sidebar-overlay" class="hidden lg:hidden fixed inset-0 z-40 bg-black/40"></div>
+    <aside id="sidebar" class="fixed z-50 top-0 left-0 h-screen bg-slate-900 text-slate-200 border-r border-slate-800 transform -translate-x-full lg:translate-x-0" role="dialog" aria-modal="true" aria-label="Sidebar">
+        <div class="flex items-center justify-between px-4 py-4 border-b border-slate-800">
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold shadow-inner">◆</div>
+            </div>
+            <button id="sidebar-collapse-toggle" class="hidden lg:inline-flex items-center justify-center rounded-md p-2 text-slate-300 hover:bg-slate-800 transition" aria-controls="sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+                <i id="sidebar-collapse-icon-top" class="fas fa-angle-left"></i>
+            </button>
+            <button id="sidebar-close" class="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-300 hover:bg-slate-800 transition" aria-label="Close sidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="px-2 py-3 overflow-y-auto h-[calc(100vh-3.25rem)]">
+            <ul class="space-y-1">
+                <li><a href="index.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-gauge-high w-5"></i><span class="truncate text-sm font-medium">Dashboard</span></a></li>
+                <li><a href="threat-detection.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-triangle-exclamation w-5"></i><span class="truncate text-sm font-medium">Threat Detection</span></a></li>
+                <li><a href="cases.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-fire w-5"></i><span class="truncate text-sm font-medium">Incidents</span></a></li>
+                <li><a href="threat-intel.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-brain w-5"></i><span class="truncate text-sm font-medium">Threat Intel</span></a></li>
+                <li><a href="analytics.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-chart-line w-5"></i><span class="truncate text-sm font-medium">Analytics</span></a></li>
+                <li><a href="soc-graph.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-project-diagram w-5"></i><span class="truncate text-sm font-medium">SOC Threat Graph</span></a></li>
+                <li><a href="soc-explorer.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-database w-5"></i><span class="truncate text-sm font-medium">SOC Entity Explorer</span></a></li>
+                <li><a href="soc-rules.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-list-check w-5"></i><span class="truncate text-sm font-medium">SOC Model Rules</span></a></li>
+                <li><a href="playbooks.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-diagram-project w-5"></i><span class="truncate text-sm font-medium">Automation Playbooks</span></a></li>
+                <li><a href="assets.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-users w-5"></i><span class="truncate text-sm font-medium">Users</span></a></li>
+                <li><a href="settings.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-gear w-5"></i><span class="truncate text-sm font-medium">Settings</span></a></li>
+            </ul>
+        </nav>
+        <div class="hidden lg:flex absolute bottom-0 left-0 right-0 p-2 border-t border-slate-800">
+            <button id="sidebar-collapse-toggle-bottom" class="w-full inline-flex items-center justify-center gap-2 rounded-md px-2 py-2 text-xs text-slate-300 hover:bg-slate-800 transition" aria-controls="sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+                <i id="sidebar-collapse-icon-bottom" class="fas fa-angle-left"></i>
+            </button>
+        </div>
+    </aside>
+    <div id="particles-js"></div>
+    <div id="main-container" class="max-w-7xl mx-auto relative z-10">
+        <header class="flex justify-between items-center mb-0 p-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-project-diagram text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-white">SOC Threat Graph</h1>
+                    <div class="text-sm text-gray-400">Real-time relationships and flows</div>
+                </div>
+            </div>
+            <a href="index.html" class="text-sm text-slate-300 hover:underline">Back to Dashboard</a>
+        </header>
+        <main class="space-y-8">
+            <!-- Control Panel -->
+            <div class="card p-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-6 py-3 rounded-xl text-white text-sm font-semibold transition-all duration-200 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            <i class="fas fa-play mr-2"></i>Start Analysis
+                        </button>
+                        <button class="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 px-6 py-3 rounded-xl text-white text-sm font-semibold transition-all duration-200 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            <i class="fas fa-pause mr-2"></i>Pause
+                        </button>
+                        <button class="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 px-6 py-3 rounded-xl text-white text-sm font-semibold transition-all duration-200 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            <i class="fas fa-sync-alt mr-2"></i>Refresh
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <select class="bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>Last 24 Hours</option>
+                            <option>Last 7 Days</option>
+                            <option>Last 30 Days</option>
+                            <option>Custom Range</option>
+                        </select>
+                        <button class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-white text-sm font-medium transition-colors duration-200">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Metrics Dashboard -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="metric-card bg-gradient-to-br from-red-900/30 to-red-800/30 border border-red-500/50 p-6 rounded-2xl backdrop-blur-sm glow-effect">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-gradient-to-br from-red-500/30 to-red-600/30 rounded-xl glow-effect">
+                                <i class="fas fa-shield-alt text-red-300 text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-red-300">12</div>
+                                <div class="text-xs text-red-200">+3 from yesterday</div>
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Active Threats</h3>
+                        <p class="text-gray-300 text-sm">Critical security events</p>
+                    </div>
+
+                    <div class="metric-card bg-gradient-to-br from-blue-900/30 to-blue-800/30 border border-blue-500/50 p-6 rounded-2xl backdrop-blur-sm glow-effect">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-xl glow-effect">
+                                <i class="fas fa-network-wired text-blue-300 text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-blue-300">47</div>
+                                <div class="text-xs text-blue-200">Across 8 domains</div>
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Connected Entities</h3>
+                        <p class="text-gray-300 text-sm">Network relationships</p>
+                    </div>
+
+                    <div class="metric-card bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 border border-yellow-500/50 p-6 rounded-2xl backdrop-blur-sm glow-effect">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-gradient-to-br from-yellow-500/30 to-yellow-600/30 rounded-xl glow-effect">
+                                <i class="fas fa-clock text-yellow-300 text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-yellow-300">24/7</div>
+                                <div class="text-xs text-yellow-200">Continuous</div>
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Real-time Updates</h3>
+                        <p class="text-gray-300 text-sm">Monitoring active</p>
+                    </div>
+
+                    <div class="metric-card bg-gradient-to-br from-purple-900/30 to-purple-800/30 border border-purple-500/50 p-6 rounded-2xl backdrop-blur-sm glow-effect">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-xl glow-effect">
+                                <i class="fas fa-chart-line text-purple-300 text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-purple-300">98%</div>
+                                <div class="text-xs text-purple-200">Accuracy rate</div>
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Detection Rate</h3>
+                        <p class="text-gray-300 text-sm">Threat identification</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graph Visualization Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Graph Area -->
+                <div class="lg:col-span-2">
+                    <div class="card p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold text-white">Interactive Threat Graph</h3>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex items-center space-x-1">
+                                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                                    <span class="text-sm text-green-400">Live</span>
+                                </div>
+                                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded-lg text-white text-sm transition-colors duration-200">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-slate-900/60 to-slate-800/60 rounded-xl p-8 border vibrant-border glow-effect">
+                            <div class="text-center py-16">
+                                <div class="relative mb-8">
+                                    <div class="w-32 h-32 mx-auto bg-gradient-to-br from-blue-500/40 to-purple-500/40 rounded-full flex items-center justify-center glow-effect">
+                                        <i class="fas fa-project-diagram text-4xl text-blue-300"></i>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center animate-pulse glow-effect">
+                                        <i class="fas fa-circle text-xs text-white"></i>
+                                    </div>
+                                </div>
+                                <h4 class="text-xl font-semibold text-white mb-2">Advanced Graph Visualization</h4>
+                                <p class="text-gray-300 mb-6 max-w-md mx-auto">Interactive 3D threat relationship mapping with real-time node analysis and connection tracing</p>
+
+                                <div class="flex flex-wrap justify-center gap-3 mb-6">
+                                    <span class="px-3 py-1 bg-gradient-to-r from-red-500/30 to-red-600/30 text-red-300 rounded-full text-sm glow-effect">Malware</span>
+                                    <span class="px-3 py-1 bg-gradient-to-r from-blue-500/30 to-blue-600/30 text-blue-300 rounded-full text-sm glow-effect">IPs</span>
+                                    <span class="px-3 py-1 bg-gradient-to-r from-purple-500/30 to-purple-600/30 text-purple-300 rounded-full text-sm glow-effect">Domains</span>
+                                    <span class="px-3 py-1 bg-gradient-to-r from-yellow-500/30 to-yellow-600/30 text-yellow-300 rounded-full text-sm glow-effect">Users</span>
+                                </div>
+
+                                <button class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 rounded-xl text-white font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 glow-effect">
+                                    <i class="fas fa-eye mr-2"></i>View Full Graph
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Panel -->
+                <div class="space-y-6">
+                    <!-- Threat Feed -->
+                    <div class="card p-6 glow-effect">
+                        <h4 class="text-lg font-semibold text-white mb-4">Recent Threats</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3 p-3 bg-gradient-to-r from-red-900/20 to-red-800/20 border border-red-500/40 rounded-lg glow-effect">
+                                <div class="w-2 h-2 bg-gradient-to-r from-red-500 to-red-600 rounded-full mt-2 animate-pulse"></div>
+                                <div class="flex-1">
+                                    <div class="text-white font-medium text-sm">Ransomware Detected</div>
+                                    <div class="text-gray-300 text-xs">192.168.1.50 • 2 min ago</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3 p-3 bg-gradient-to-r from-yellow-900/20 to-yellow-800/20 border border-yellow-500/40 rounded-lg glow-effect">
+                                <div class="w-2 h-2 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full mt-2 animate-pulse"></div>
+                                <div class="flex-1">
+                                    <div class="text-white font-medium text-sm">Suspicious Login</div>
+                                    <div class="text-gray-300 text-xs">user@domain.com • 5 min ago</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3 p-3 bg-gradient-to-r from-blue-900/20 to-blue-800/20 border border-blue-500/40 rounded-lg glow-effect">
+                                <div class="w-2 h-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mt-2 animate-pulse"></div>
+                                <div class="flex-1">
+                                    <div class="text-white font-medium text-sm">New Connection</div>
+                                    <div class="text-gray-300 text-xs">malicious-site.com • 8 min ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Graph Controls -->
+                    <div class="card p-6 glow-effect">
+                        <h4 class="text-lg font-semibold text-white mb-4">Graph Controls</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-200 mb-2">Node Size</label>
+                                <input type="range" class="w-full h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg appearance-none cursor-pointer glow-effect">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-200 mb-2">Edge Strength</label>
+                                <input type="range" class="w-full h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg appearance-none cursor-pointer glow-effect">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-200">Show Labels</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer" checked>
+                                    <div class="w-11 h-6 bg-gradient-to-r from-slate-600 to-slate-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-purple-600 peer-checked:to-blue-600 glow-effect"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="assets/particles-init.js"></script>
+    <script src="assets/button-functionality.js"></script>
+
+    <script>
+        // Graph Control Functionality
+        (function(){
+            const startBtn = document.querySelector('button[class*="from-blue-600"]');
+            const pauseBtn = document.querySelector('button[class*="from-slate-700"]');
+            const refreshBtn = document.querySelector('button[class*="from-emerald-600"]');
+            const timeSelect = document.querySelector('select');
+            const filterBtn = document.querySelector('button[class*="fa-filter"]');
+            const nodeSizeSlider = document.querySelectorAll('input[type="range"]')[0];
+            const edgeStrengthSlider = document.querySelectorAll('input[type="range"]')[1];
+            const labelsToggle = document.querySelector('input[type="checkbox"]');
+            const expandBtn = document.querySelector('button[class*="fa-expand"]');
+            const viewFullBtn = document.querySelector('button[class*="fa-eye"]');
+
+            let isAnalyzing = false;
+            let isPaused = false;
+
+            // Start Analysis
+            startBtn.addEventListener('click', function() {
+                if (!isAnalyzing) {
+                    isAnalyzing = true;
+                    this.innerHTML = '<i class="fas fa-stop mr-2"></i>Stop Analysis';
+                    this.className = this.className.replace('from-blue-600', 'from-red-600').replace('to-blue-700', 'to-red-700');
+                    console.log('Analysis started');
+                    // Simulate real-time updates
+                    startRealTimeUpdates();
+                } else {
+                    isAnalyzing = false;
+                    this.innerHTML = '<i class="fas fa-play mr-2"></i>Start Analysis';
+                    this.className = this.className.replace('from-red-600', 'from-blue-600').replace('to-red-700', 'to-blue-700');
+                    console.log('Analysis stopped');
+                    stopRealTimeUpdates();
+                }
+            });
+
+            // Pause
+            pauseBtn.addEventListener('click', function() {
+                if (isAnalyzing) {
+                    isPaused = !isPaused;
+                    this.innerHTML = isPaused ? '<i class="fas fa-play mr-2"></i>Resume' : '<i class="fas fa-pause mr-2"></i>Pause';
+                    console.log(isPaused ? 'Analysis paused' : 'Analysis resumed');
+                }
+            });
+
+            // Refresh
+            refreshBtn.addEventListener('click', function() {
+                console.log('Refreshing graph data');
+                // Simulate refresh
+                updateMetrics();
+            });
+
+            // Time Range
+            timeSelect.addEventListener('change', function() {
+                console.log('Time range changed to:', this.value);
+                updateGraphData(this.value);
+            });
+
+            // Filter
+            filterBtn.addEventListener('click', function() {
+                console.log('Opening filter modal');
+                // Could open a modal here
+            });
+
+            // Node Size Slider
+            nodeSizeSlider.addEventListener('input', function() {
+                console.log('Node size:', this.value);
+                updateGraphVisualization('nodeSize', this.value);
+            });
+
+            // Edge Strength Slider
+            edgeStrengthSlider.addEventListener('input', function() {
+                console.log('Edge strength:', this.value);
+                updateGraphVisualization('edgeStrength', this.value);
+            });
+
+            // Labels Toggle
+            labelsToggle.addEventListener('change', function() {
+                console.log('Labels:', this.checked ? 'shown' : 'hidden');
+                updateGraphVisualization('showLabels', this.checked);
+            });
+
+            // Expand
+            expandBtn.addEventListener('click', function() {
+                console.log('Expanding graph view');
+                // Could maximize the graph area
+            });
+
+            // View Full Graph
+            viewFullBtn.addEventListener('click', function() {
+                console.log('Opening full graph view');
+                // Could navigate to full graph page
+            });
+
+            function startRealTimeUpdates() {
+                // Simulate real-time threat updates
+                const threatFeed = document.querySelector('.space-y-3');
+                const threats = [
+                    { type: 'Ransomware', ip: '192.168.1.50', time: '2 min ago' },
+                    { type: 'Suspicious Login', user: 'user@domain.com', time: '5 min ago' },
+                    { type: 'New Connection', domain: 'malicious-site.com', time: '8 min ago' }
+                ];
+
+                setInterval(() => {
+                    if (!isPaused && isAnalyzing) {
+                        const randomThreat = threats[Math.floor(Math.random() * threats.length)];
+                        addThreatAlert(randomThreat);
+                    }
+                }, 10000); // Every 10 seconds
+            }
+
+            function stopRealTimeUpdates() {
+                // Clear intervals if any
+            }
+
+            function addThreatAlert(threat) {
+                const threatFeed = document.querySelector('.space-y-3');
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'flex items-start space-x-3 p-3 bg-red-900/10 border border-red-700/20 rounded-lg';
+                alertDiv.innerHTML = `
+                    <div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+                    <div class="flex-1">
+                        <div class="text-white font-medium text-sm">${threat.type} Detected</div>
+                        <div class="text-gray-400 text-xs">${threat.ip || threat.user || threat.domain} • just now</div>
+                    </div>
+                `;
+                threatFeed.insertBefore(alertDiv, threatFeed.firstChild);
+
+                // Remove old alerts after 5
+                if (threatFeed.children.length > 5) {
+                    threatFeed.removeChild(threatFeed.lastChild);
+                }
+            }
+
+            function updateMetrics() {
+                // Simulate updating metrics
+                const metrics = document.querySelectorAll('.text-2xl.font-bold');
+                metrics.forEach(metric => {
+                    const current = parseInt(metric.textContent);
+                    const change = Math.floor(Math.random() * 6) - 3; // -3 to +3
+                    metric.textContent = Math.max(0, current + change);
+                });
+            }
+
+            function updateGraphData(timeRange) {
+                // Simulate updating graph based on time range
+                console.log('Updating graph for time range:', timeRange);
+            }
+
+            function updateGraphVisualization(setting, value) {
+                // Simulate updating graph visualization
+                console.log('Updating graph:', setting, value);
+            }
+        })();
+    </script>
+
+    <script>
+        // Ensure nav active state reflects current page
+        (function markActiveLinks(){
+            const sidebar = document.getElementById('sidebar');
+            const links = sidebar.querySelectorAll('nav a');
+            const current = location.pathname.split('/').pop();
+            links.forEach(a => {
+                const file = (a.getAttribute('href')||'').split('/').pop();
+                const isActive = file === current;
+                a.classList.toggle('active', isActive);
+                if (isActive) {
+                    a.style.boxShadow = 'inset 3px 0 0 0 rgb(99 102 241)';
+                    a.classList.add('text-white');
+                    a.classList.add('bg-slate-800');
+                }
+            });
+        })();
+    </script>
+    <script>
+        // Sidebar controller copied behavior
+        (function(){
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const mobileToggle = document.getElementById('sidebar-mobile-toggle');
+            const closeBtn = document.getElementById('sidebar-close');
+            const collapseTop = document.getElementById('sidebar-collapse-toggle');
+            const collapseBottom = document.getElementById('sidebar-collapse-toggle-bottom');
+            let collapsed = false;
+            function applyCollapsedState(){
+                const isDesktop = window.innerWidth >= 1024;
+                if (isDesktop) {
+                    document.body.classList.add('desktop-with-sidebar');
+                    document.body.classList.toggle('desktop-with-sidebar-collapsed', collapsed);
+                    sidebar.classList.toggle('collapsed', collapsed);
+                    const topIcon = document.getElementById('sidebar-collapse-icon-top');
+                    const botIcon = document.getElementById('sidebar-collapse-icon-bottom');
+                    const expanded = !collapsed;
+                    collapseTop && collapseTop.setAttribute('aria-expanded', String(expanded));
+                    collapseBottom && collapseBottom.setAttribute('aria-expanded', String(expanded));
+                    if (topIcon) topIcon.className = expanded ? 'fas fa-angle-left' : 'fas fa-angle-right';
+                    if (botIcon) botIcon.className = expanded ? 'fas fa-angle-left' : 'fas fa-angle-right';
+                } else {
+                    document.body.classList.remove('desktop-with-sidebar');
+                    document.body.classList.remove('desktop-with-sidebar-collapsed');
+                    sidebar.classList.remove('collapsed');
+                }
+            }
+            function setCollapsed(next){ collapsed = next; applyCollapsedState(); }
+            function openMobile(){ sidebar.classList.remove('-translate-x-full'); overlay.classList.remove('hidden'); document.body.classList.add('sidebar-modal-open'); mobileToggle && mobileToggle.setAttribute('aria-expanded','true'); }
+            function closeMobile(){ sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); document.body.classList.remove('sidebar-modal-open'); mobileToggle && mobileToggle.setAttribute('aria-expanded','false'); }
+            mobileToggle && mobileToggle.addEventListener('click', openMobile);
+            overlay && overlay.addEventListener('click', closeMobile);
+            closeBtn && closeBtn.addEventListener('click', closeMobile);
+            function toggleCollapse(){ setCollapsed(!collapsed); }
+            collapseTop && collapseTop.addEventListener('click', toggleCollapse);
+            collapseBottom && collapseBottom.addEventListener('click', toggleCollapse);
+            window.addEventListener('resize', applyCollapsedState);
+            applyCollapsedState();
+        })();
+    </script>
+</body>
+</html>

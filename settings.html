@@ -17,96 +17,13 @@
             darkMode: 'class',
         }
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="stylesheet" href="assets/shared-buttons.css">
     <link rel="stylesheet" href="assets/chatbot.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-       <!-- <head> -->
-        <!-- ...existing code... -->
-        <!-- <style>
-            body {
-                font-family: 'Inter', sans-serif;
-                background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
-                color: #d1d5db;
-            }
-    
-            #particles-js {
-                position: fixed;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                z-index: -1;
-            }
-    
-            .card {
-                background: rgba(31, 41, 55, 0.8);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(55, 65, 81, 0.3);
-                border-radius: 0.75rem;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-                transition: all 0.3s ease;
-            }
-    
-            .card:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-            }
-    
-            .metric-card {
-                background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-                border: 1px solid rgba(59, 130, 246, 0.2);
-            }
-    
-            .threat-timeline {
-                position: relative;
-            }
-    
-            .threat-timeline::before {
-                content: '';
-                position: absolute;
-                left: 20px;
-                top: 0;
-                bottom: 0;
-                width: 2px;
-                background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-            }
-    
-            .threat-item {
-                position: relative;
-                margin-left: 40px;
-                margin-bottom: 20px;
-            }
-    
-            .threat-item::before {
-                content: '';
-                position: absolute;
-                left: -30px;
-                top: 8px;
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                background: #3b82f6;
-                border: 3px solid #1f2937;
-            }
-    
-            .threat-item.high::before {
-                background: #ef4444;
-            }
-    
-            .threat-item.medium::before {
-                background: #f59e0b;
-            }
-    
-            .threat-item.low::before {
-                background: #10b981;
-            }
-        </style> -->
-        <!-- ...existing code... -->
-    <!-- </head> -->
     <style>
         :root { --sidebar-width: 16rem; --sidebar-width-collapsed: 4.5rem; --sidebar-transition-duration: 300ms; --sidebar-transition-ease: ease-in-out; }
         body { transition: padding-left var(--sidebar-transition-duration) var(--sidebar-transition-ease); }
@@ -156,6 +73,10 @@
                 <li><a href="cases.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-fire w-5"></i><span class="truncate text-sm font-medium">Incidents</span></a></li>
                 <li><a href="threat-intel.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-brain w-5"></i><span class="truncate text-sm font-medium">Threat Intel</span></a></li>
                 <li><a href="analytics.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-chart-line w-5"></i><span class="truncate text-sm font-medium">Analytics</span></a></li>
+                <li><a href="soc-graph.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-project-diagram w-5"></i><span class="truncate text-sm font-medium">SOC Threat Graph</span></a></li>
+                <li><a href="soc-explorer.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-database w-5"></i><span class="truncate text-sm font-medium">SOC Entity Explorer</span></a></li>
+                <li><a href="soc-rules.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-list-check w-5"></i><span class="truncate text-sm font-medium">SOC Model Rules</span></a></li>
+                <li><a href="playbooks.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-diagram-project w-5"></i><span class="truncate text-sm font-medium">Automation Playbooks</span></a></li>
                 <li><a href="assets.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-slate-300"><i class="sidebar-icon fas fa-users w-5"></i><span class="truncate text-sm font-medium">Users</span></a></li>
                 <li><a href="settings.html" class="sidebar-link group flex items-center gap-3 rounded-md px-3 py-2 text-white bg-slate-800" style="box-shadow: inset 3px 0 0 0 rgb(99 102 241)"><i class="sidebar-icon fas fa-gear w-5"></i><span class="truncate text-sm font-medium">Settings</span></a></li>
             </ul>
@@ -174,379 +95,165 @@
             <h1 class="text-2xl font-bold text-white">Settings</h1>
             <a href="index.html" class="text-sm text-slate-300 hover:underline">Back to Dashboard</a>
         </header>
+        
         <main class="space-y-6">
-            <!-- System Settings -->
-            <div class="card p-6">
-                <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-cog mr-3 text-blue-400"></i>
-                    System Settings
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Theme</label>
-                            <select id="theme-select" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                                <option value="dark">Dark Mode</option>
-                                <option value="light">Light Mode</option>
-                                <option value="auto">Auto (System)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Language</label>
-                            <select id="language-select" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                                <option value="en">English</option>
-                                <option value="es">Español</option>
-                                <option value="fr">Français</option>
-                                <option value="de">Deutsch</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Time Zone</label>
-                            <select id="timezone-select" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                                <option value="UTC">UTC</option>
-                                <option value="America/New_York">Eastern Time</option>
-                                <option value="America/Chicago">Central Time</option>
-                                <option value="America/Denver">Mountain Time</option>
-                                <option value="America/Los_Angeles">Pacific Time</option>
-                                <option value="Europe/London">London</option>
-                                <option value="Europe/Paris">Paris</option>
-                                <option value="Asia/Tokyo">Tokyo</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="persist-collapse" class="accent-indigo-500" checked>
-                                <span class="text-sm">Persist sidebar collapsed state</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="auto-refresh" class="accent-indigo-500" checked>
-                                <span class="text-sm">Auto-refresh dashboard data</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="sound-alerts" class="accent-indigo-500">
-                                <span class="text-sm">Enable sound alerts</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="reduced-motion" class="accent-indigo-500">
-                                <span class="text-sm">Reduce animations (accessibility)</span>
-                            </label>
-                        </div>
-                    </div>
+            <!-- Settings Tabs -->
+            <div class="card p-1 sm:p-4">
+                <div class="border-b border-gray-700 flex items-center space-x-2 sm:space-x-4 overflow-x-auto">
+                    <button id="profile-tab" class="flex items-center space-x-2 whitespace-nowrap py-3 px-4 text-sm font-medium border-b-2 border-blue-500 text-white">
+                        <i class="fas fa-user w-5 h-5"></i>
+                        <span>Profile</span>
+                    </button>
+                    <button id="notifications-tab" class="flex items-center space-x-2 whitespace-nowrap py-3 px-4 text-sm font-medium border-b-2 border-transparent text-gray-400 hover:text-white">
+                        <i class="fas fa-bell w-5 h-5"></i>
+                        <span>Notifications</span>
+                    </button>
+                    <button id="theme-tab" class="flex items-center space-x-2 whitespace-nowrap py-3 px-4 text-sm font-medium border-b-2 border-transparent text-gray-400 hover:text-white">
+                        <i class="fas fa-palette w-5 h-5"></i>
+                        <span>Theme</span>
+                    </button>
                 </div>
-            </div>
+                
+                <!-- Profile Tab Content -->
+                <div id="profile-content" class="settings-content">
+                    <!-- Personal Information Section -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-6 border-b border-gray-700">
+                        <div class="md:col-span-1">
+                            <h4 class="font-semibold text-white">Personal Information</h4>
+                            <p class="text-sm text-gray-400 mt-1">Update your name and contact details.</p>
+                        </div>
+                        <div class="md:col-span-2 card p-5">
+                            <form id="profile-form" class="space-y-4 text-sm">
+                        <div>
+                                    <label class="block text-gray-400 mb-1">Full Name</label>
+                                    <input type="text" id="full-name" value="Analyst Alpha" class="w-full bg-slate-900/80 border border-gray-600 rounded-lg p-2 text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" />
+                        </div>
+                        <div>
+                                    <label class="block text-gray-400 mb-1">Email Address</label>
+                                    <input type="email" id="email-address" value="alpha@soc.smart" class="w-full bg-slate-900/80 border border-gray-600 rounded-lg p-2 text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" />
+                                </div>
+                                <div class="flex justify-end">
+                                    <button type="submit" class="px-4 py-2 text-sm font-medium rounded-lg text-white bg-blue-600 hover:opacity-90 transition-opacity">Save Profile</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-            <!-- Security Settings -->
-            <div class="card p-6">
-                <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-shield-alt mr-3 text-green-400"></i>
-                    Security Settings
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Security Settings Section -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-6 border-b border-gray-700">
+                        <div class="md:col-span-1">
+                            <h4 class="font-semibold text-white">Security Settings</h4>
+                            <p class="text-sm text-gray-400 mt-1">Manage your account security.</p>
+                        </div>
+                        <div class="md:col-span-2 card p-5">
                     <div class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-2">Session Timeout (minutes)</label>
-                            <input type="number" id="session-timeout" value="30" min="5" max="480" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
+                                    <input type="number" id="session-timeout" value="30" min="5" max="480" class="w-full bg-slate-900/80 border border-gray-600 rounded-md px-3 py-2 text-white">
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Password Policy</label>
-                            <select id="password-policy" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                                <option value="standard">Standard (8+ chars)</option>
-                                <option value="strong">Strong (12+ chars, mixed case, numbers)</option>
-                                <option value="enterprise">Enterprise (16+ chars, special chars, history)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Two-Factor Authentication</label>
-                            <div class="flex items-center gap-2">
-                                <button id="enable-2fa" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm">Enable 2FA</button>
-                                <span class="text-xs text-gray-400">Not configured</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
                         <div>
                             <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="audit-logging" class="accent-indigo-500" checked>
+                                        <input type="checkbox" id="audit-logging" class="accent-blue-500" checked>
                                 <span class="text-sm">Enable audit logging</span>
                             </label>
                         </div>
-                        <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="ip-whitelist" class="accent-indigo-500">
-                                <span class="text-sm">Enable IP whitelist</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="encrypt-storage" class="accent-indigo-500" checked>
-                                <span class="text-sm">Encrypt local storage</span>
-                            </label>
-                        </div>
-            <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="auto-logout" class="accent-indigo-500" checked>
-                                <span class="text-sm">Auto-logout on inactivity</span>
-                            </label>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Notification Settings -->
-            <div class="card p-6">
-                <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-bell mr-3 text-yellow-400"></i>
-                    Notification Settings
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Email Notifications</label>
-                            <div class="space-y-2">
-                                <label class="flex items-center gap-2 text-gray-300">
-                                    <input type="checkbox" id="email-critical" class="accent-indigo-500" checked>
-                                    <span class="text-sm">Critical alerts</span>
-                                </label>
-                                <label class="flex items-center gap-2 text-gray-300">
-                                    <input type="checkbox" id="email-high" class="accent-indigo-500" checked>
-                                    <span class="text-sm">High severity incidents</span>
-                                </label>
-                                <label class="flex items-center gap-2 text-gray-300">
-                                    <input type="checkbox" id="email-daily" class="accent-indigo-500">
-                                    <span class="text-sm">Daily summary reports</span>
-                                </label>
-                            </div>
+                <!-- Notifications Tab Content -->
+                <div id="notifications-content" class="settings-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-6">
+                        <div class="md:col-span-1">
+                            <h4 class="font-semibold text-white">Notification Channels</h4>
+                            <p class="text-sm text-gray-400 mt-1">Choose how you receive alerts based on severity.</p>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Push Notifications</label>
-                            <div class="space-y-2">
-                                <label class="flex items-center gap-2 text-gray-300">
-                                    <input type="checkbox" id="push-browser" class="accent-indigo-500">
-                                    <span class="text-sm">Browser notifications</span>
-                                </label>
-                                <label class="flex items-center gap-2 text-gray-300">
-                                    <input type="checkbox" id="push-mobile" class="accent-indigo-500">
-                                    <span class="text-sm">Mobile app notifications</span>
-                                </label>
+                        <div class="md:col-span-2 card p-5">
+                            <div class="space-y-4">
+                                <div class="p-3 bg-slate-800/50 rounded-lg">
+                                    <h5 class="font-medium text-white capitalize mb-2">High Severity Alerts</h5>
+                                    <div class="flex items-center justify-between space-x-2">
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="high-in-app" class="accent-blue-500" checked>
+                                            <label class="text-sm text-gray-400">In-App</label>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="high-email" class="accent-blue-500" checked>
+                                            <label class="text-sm text-gray-400">Email</label>
                             </div>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="high-push" class="accent-blue-500" checked>
+                                            <label class="text-sm text-gray-400">Push</label>
                         </div>
                     </div>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Alert Thresholds</label>
-                            <div class="space-y-2">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-gray-300">High severity threshold</span>
-                                    <input type="number" id="high-threshold" value="5" min="1" max="100" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-white text-sm">
                                 </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-gray-300">Medium severity threshold</span>
-                                    <input type="number" id="medium-threshold" value="10" min="1" max="100" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-white text-sm">
+                                <div class="p-3 bg-slate-800/50 rounded-lg">
+                                    <h5 class="font-medium text-white capitalize mb-2">Medium Severity Alerts</h5>
+                                    <div class="flex items-center justify-between space-x-2">
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="medium-in-app" class="accent-blue-500" checked>
+                                            <label class="text-sm text-gray-400">In-App</label>
                                 </div>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="medium-email" class="accent-blue-500" checked>
+                                            <label class="text-sm text-gray-400">Email</label>
                             </div>
-            </div>
-            <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Quiet Hours</label>
-                            <div class="flex items-center gap-2">
-                                <input type="time" id="quiet-start" value="22:00" class="bg-gray-700 border border-gray-600 rounded px-2 py-1 text-white text-sm">
-                                <span class="text-gray-400">to</span>
-                                <input type="time" id="quiet-end" value="08:00" class="bg-gray-700 border border-gray-600 rounded px-2 py-1 text-white text-sm">
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="medium-push" class="accent-blue-500">
+                                            <label class="text-sm text-gray-400">Push</label>
                             </div>
                         </div>
                     </div>
+                                <div class="p-3 bg-slate-800/50 rounded-lg">
+                                    <h5 class="font-medium text-white capitalize mb-2">Low Severity Alerts</h5>
+                                    <div class="flex items-center justify-between space-x-2">
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="low-in-app" class="accent-blue-500" checked>
+                                            <label class="text-sm text-gray-400">In-App</label>
                 </div>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="low-email" class="accent-blue-500">
+                                            <label class="text-sm text-gray-400">Email</label>
             </div>
-
-            <!-- Integration Settings -->
-            <div class="card p-6">
-                <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-plug mr-3 text-purple-400"></i>
-                    Integration Settings
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">SIEM Integration</label>
-                            <select id="siem-provider" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                                <option value="none">None</option>
-                                <option value="splunk">Splunk</option>
-                                <option value="qradar">IBM QRadar</option>
-                                <option value="arcsight">ArcSight</option>
-                                <option value="elastic">Elastic SIEM</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">API Endpoint</label>
-                            <input type="url" id="api-endpoint" placeholder="https://api.example.com" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">API Key</label>
-                            <input type="password" id="api-key" placeholder="Enter API key" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Ticketing System</label>
-                            <select id="ticketing-system" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                                <option value="none">None</option>
-                                <option value="servicenow">ServiceNow</option>
-                                <option value="jira">Jira</option>
-                                <option value="remedy">BMC Remedy</option>
-                                <option value="custom">Custom API</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Webhook URL</label>
-                            <input type="url" id="webhook-url" placeholder="https://hooks.example.com/security" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-            </div>
-            <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="auto-ticket" class="accent-indigo-500">
-                                <span class="text-sm">Auto-create tickets for high severity</span>
-                            </label>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="low-push" class="accent-blue-500">
+                                            <label class="text-sm text-gray-400">Push</label>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Performance Settings -->
-            <div class="card p-6">
-                <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-tachometer-alt mr-3 text-orange-400"></i>
-                    Performance Settings
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Data Refresh Interval (seconds)</label>
-                            <input type="number" id="refresh-interval" value="30" min="5" max="300" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Chart Data Points</label>
-                            <input type="number" id="chart-points" value="50" min="10" max="200" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Log Retention (days)</label>
-                            <input type="number" id="log-retention" value="30" min="1" max="365" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white">
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="enable-caching" class="accent-indigo-500" checked>
-                                <span class="text-sm">Enable data caching</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="lazy-loading" class="accent-indigo-500" checked>
-                                <span class="text-sm">Enable lazy loading</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label class="flex items-center gap-2 text-gray-300">
-                                <input type="checkbox" id="compression" class="accent-indigo-500" checked>
-                                <span class="text-sm">Enable data compression</span>
-                            </label>
-            </div>
-            <div>
-                            <button id="clear-cache" class="bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 rounded text-sm">
-                                <i class="fas fa-trash mr-2"></i>Clear Cache
-                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- System Information -->
-            <div class="card p-6">
-                <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-info-circle mr-3 text-blue-400"></i>
-                    System Information
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Version:</span>
-                            <span class="text-white">2.1.0</span>
+                
+                <!-- Theme Tab Content -->
+                <div id="theme-content" class="settings-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-6">
+                        <div class="md:col-span-1">
+                            <h4 class="font-semibold text-white">Appearance</h4>
+                            <p class="text-sm text-gray-400 mt-1">Switch between light and dark mode.</p>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Build:</span>
-                            <span class="text-white">2025.01.15</span>
+                        <div class="md:col-span-2 card p-5">
+                            <div class="flex space-x-4">
+                                <button id="dark-theme" class="w-full text-center p-3 rounded-lg border-2 border-blue-500 bg-slate-700/50 text-white">Dark Mode</button>
+                                <button id="light-theme" class="w-full text-center p-3 rounded-lg border-2 border-transparent bg-slate-800/50 text-gray-400">Light Mode</button>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Status:</span>
-                            <span class="text-green-400">Operational</span>
                         </div>
                     </div>
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Uptime:</span>
-                            <span class="text-white">99.9%</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Last Update:</span>
-                            <span class="text-white">2025-01-15</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">License:</span>
-                            <span class="text-white">Enterprise</span>
-                        </div>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Database:</span>
-                            <span class="text-white">PostgreSQL 14</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Cache:</span>
-                            <span class="text-white">Redis 6.2</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Storage:</span>
-                            <span class="text-white">2.3 TB</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="card p-6">
-                <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-tools mr-3 text-gray-400"></i>
-                    Actions
-                </h2>
-                <div class="flex flex-wrap gap-4">
-                    <button id="save-settings" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                        <i class="fas fa-save mr-2"></i>Save Settings
-                    </button>
-                    <button id="reset-settings" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">
-                        <i class="fas fa-undo mr-2"></i>Reset to Defaults
-                    </button>
-                    <button id="export-config" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
-                        <i class="fas fa-download mr-2"></i>Export Configuration
-                    </button>
-                    <button id="import-config" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">
-                        <i class="fas fa-upload mr-2"></i>Import Configuration
-                    </button>
-                    <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </button>
                 </div>
             </div>
         </main>
     </div>
 
     <script>
-        // Advanced Settings Manager
+        // Back button handler (if present)
+        document.addEventListener('DOMContentLoaded', () => {
+            const backButtons = document.querySelectorAll('[data-action="history-back"]');
+            backButtons.forEach(btn => btn.addEventListener('click', () => history.back()));
+        });
+        
+        // Settings Manager
         class SettingsManager {
             constructor() {
                 this.settings = this.loadSettings();
@@ -718,7 +425,13 @@
                 // Load theme
                 const theme = this.settings.theme || 'dark';
                 this.applyTheme(theme);
-                document.getElementById('theme-select').value = theme;
+                if (theme === 'dark') {
+                    document.getElementById('dark-theme').classList.add('border-blue-500', 'bg-slate-700/50', 'text-white');
+                    document.getElementById('light-theme').classList.remove('border-blue-500', 'bg-slate-700/50', 'text-white');
+                } else {
+                    document.getElementById('light-theme').classList.add('border-blue-500', 'bg-slate-700/50', 'text-white');
+                    document.getElementById('dark-theme').classList.remove('border-blue-500', 'bg-slate-700/50', 'text-white');
+                }
 
                 // Load other settings
                 Object.keys(this.settings).forEach(key => {
@@ -747,36 +460,17 @@
                 // Set default values
                 const defaults = {
                     theme: 'dark',
-                    language: 'en',
-                    timezone: 'UTC',
-                    'persist-collapse': true,
-                    'auto-refresh': true,
-                    'sound-alerts': false,
-                    'reduced-motion': false,
                     'session-timeout': 30,
-                    'password-policy': 'standard',
                     'audit-logging': true,
-                    'ip-whitelist': false,
-                    'encrypt-storage': true,
-                    'auto-logout': true,
-                    'email-critical': true,
-                    'email-high': true,
-                    'email-daily': false,
-                    'push-browser': false,
-                    'push-mobile': false,
-                    'high-threshold': 5,
-                    'medium-threshold': 10,
-                    'quiet-start': '22:00',
-                    'quiet-end': '08:00',
-                    'siem-provider': 'none',
-                    'ticketing-system': 'none',
-                    'auto-ticket': false,
-                    'refresh-interval': 30,
-                    'chart-points': 50,
-                    'log-retention': 30,
-                    'enable-caching': true,
-                    'lazy-loading': true,
-                    'compression': true
+                    'high-in-app': true,
+                    'high-email': true,
+                    'high-push': true,
+                    'medium-in-app': true,
+                    'medium-email': true,
+                    'medium-push': false,
+                    'low-in-app': true,
+                    'low-email': false,
+                    'low-push': false
                 };
 
                 Object.keys(defaults).forEach(key => {
@@ -787,10 +481,22 @@
             }
 
             bindEvents() {
-                // Theme selector
-                document.getElementById('theme-select').addEventListener('change', (e) => {
-                    this.settings.theme = e.target.value;
-                    this.applyTheme(e.target.value);
+                // Tab switching
+                document.getElementById('profile-tab').addEventListener('click', () => this.switchTab('profile'));
+                document.getElementById('notifications-tab').addEventListener('click', () => this.switchTab('notifications'));
+                document.getElementById('theme-tab').addEventListener('click', () => this.switchTab('theme'));
+
+                // Theme buttons
+                document.getElementById('dark-theme').addEventListener('click', () => {
+                    this.settings.theme = 'dark';
+                    this.applyTheme('dark');
+                    this.updateThemeButtons('dark');
+                });
+
+                document.getElementById('light-theme').addEventListener('click', () => {
+                    this.settings.theme = 'light';
+                    this.applyTheme('light');
+                    this.updateThemeButtons('light');
                 });
 
                 // All form inputs
@@ -804,159 +510,52 @@
                             } else {
                                 this.settings[key] = e.target.value;
                             }
+                            this.saveSettings();
                         }
                     });
                 });
 
-                // Action buttons
-                document.getElementById('save-settings').addEventListener('click', () => {
-                    this.saveSettings();
-                });
-
-                document.getElementById('reset-settings').addEventListener('click', () => {
-                    if (confirm('Are you sure you want to reset all settings to defaults?')) {
-                        this.resetToDefaults();
-                    }
-                });
-
-                document.getElementById('export-config').addEventListener('click', () => {
-                    this.exportConfiguration();
-                });
-
-                document.getElementById('import-config').addEventListener('click', () => {
-                    this.importConfiguration();
-                });
-
-                document.getElementById('clear-cache').addEventListener('click', () => {
-                    this.clearCache();
-                });
-
-                document.getElementById('enable-2fa').addEventListener('click', () => {
-                    this.enable2FA();
-                });
-
-                // Notification permission request
-                document.getElementById('push-browser').addEventListener('change', (e) => {
-                    if (e.target.checked) {
-                        this.requestNotificationPermission();
-                }
-            });
-        }
-
-            resetToDefaults() {
-                this.settings = {};
-                this.initializeSettings();
-                this.loadSavedSettings();
-                this.showNotification('Settings reset to defaults', 'info');
-            }
-
-            exportConfiguration() {
-                const config = {
-                    version: '2.1.0',
-                    timestamp: new Date().toISOString(),
-                    settings: this.settings
-                };
-
-                const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `smartsoc-config-${new Date().toISOString().split('T')[0]}.json`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                this.showNotification('Configuration exported successfully', 'success');
-            }
-
-            importConfiguration() {
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = '.json';
-                input.onchange = (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            try {
-                                const config = JSON.parse(e.target.result);
-                                if (config.settings) {
-                                    this.settings = { ...this.settings, ...config.settings };
-                                    this.loadSavedSettings();
-                                    this.showNotification('Configuration imported successfully', 'success');
-                                } else {
-                                    this.showNotification('Invalid configuration file', 'error');
-                                }
-                            } catch (error) {
-                                this.showNotification('Failed to parse configuration file', 'error');
-                            }
-                        };
-                        reader.readAsText(file);
-                    }
-                };
-                input.click();
-            }
-
-            clearCache() {
-                if ('caches' in window) {
-                    caches.keys().then(names => {
-                        names.forEach(name => {
-                            caches.delete(name);
-                        });
-                    });
-                }
-                this.showNotification('Cache cleared successfully', 'success');
-            }
-
-            enable2FA() {
-                // Simulate 2FA setup
-                const qrCode = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZiIvPjx0ZXh0IHg9IjEwMCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMwMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjJGQSBRUiBDb2RlPC90ZXh0Pjwvc3ZnPg==';
-                
-                const modal = document.createElement('div');
-                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-                modal.innerHTML = `
-                    <div class="bg-gray-800 p-6 rounded-lg max-w-md w-full mx-4">
-                        <h3 class="text-xl font-semibold text-white mb-4">Enable Two-Factor Authentication</h3>
-                        <div class="text-center mb-4">
-                            <img src="${qrCode}" alt="QR Code" class="mx-auto mb-4">
-                            <p class="text-gray-300 text-sm mb-4">Scan this QR code with your authenticator app</p>
-                            <input type="text" placeholder="Enter verification code" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white mb-4">
-                        </div>
-                        <div class="flex gap-2">
-                            <button id="verify-2fa" class="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Verify & Enable</button>
-                            <button id="cancel-2fa" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">Cancel</button>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(modal);
-
-                document.getElementById('verify-2fa').addEventListener('click', () => {
-                    document.getElementById('enable-2fa').textContent = '2FA Enabled';
-                    document.getElementById('enable-2fa').classList.remove('bg-green-600', 'hover:bg-green-700');
-                    document.getElementById('enable-2fa').classList.add('bg-gray-600');
-                    document.querySelector('#enable-2fa').nextElementSibling.textContent = 'Configured';
-                    document.body.removeChild(modal);
-                    this.showNotification('Two-factor authentication enabled', 'success');
-                });
-
-                document.getElementById('cancel-2fa').addEventListener('click', () => {
-                    document.body.removeChild(modal);
+                // Profile form
+                document.getElementById('profile-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.showNotification('Profile updated successfully!', 'success');
                 });
             }
 
-            requestNotificationPermission() {
-                if ('Notification' in window) {
-                    Notification.requestPermission().then(permission => {
-                        if (permission === 'granted') {
-                            this.showNotification('Browser notifications enabled', 'success');
-                        } else {
-                            document.getElementById('push-browser').checked = false;
-                            this.showNotification('Browser notifications blocked', 'warning');
-                        }
-                    });
+            switchTab(tabName) {
+                // Hide all content
+                document.querySelectorAll('.settings-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                // Remove active from all tabs
+                document.querySelectorAll('[id$="-tab"]').forEach(tab => {
+                    tab.classList.remove('border-blue-500', 'text-white');
+                    tab.classList.add('border-transparent', 'text-gray-400');
+                });
+
+                // Show selected content
+                document.getElementById(tabName + '-content').classList.remove('hidden');
+
+                // Activate selected tab
+                document.getElementById(tabName + '-tab').classList.remove('border-transparent', 'text-gray-400');
+                document.getElementById(tabName + '-tab').classList.add('border-blue-500', 'text-white');
+            }
+
+            updateThemeButtons(selectedTheme) {
+                const darkBtn = document.getElementById('dark-theme');
+                const lightBtn = document.getElementById('light-theme');
+
+                if (selectedTheme === 'dark') {
+                    darkBtn.classList.add('border-blue-500', 'bg-slate-700/50', 'text-white');
+                    darkBtn.classList.remove('border-transparent', 'bg-slate-800/50', 'text-gray-400');
+                    lightBtn.classList.remove('border-blue-500', 'bg-slate-700/50', 'text-white');
+                    lightBtn.classList.add('border-transparent', 'bg-slate-800/50', 'text-gray-400');
                 } else {
-                    document.getElementById('push-browser').checked = false;
-                    this.showNotification('Browser notifications not supported', 'warning');
+                    lightBtn.classList.add('border-blue-500', 'bg-slate-700/50', 'text-white');
+                    lightBtn.classList.remove('border-transparent', 'bg-slate-800/50', 'text-gray-400');
+                    darkBtn.classList.remove('border-blue-500', 'bg-slate-700/50', 'text-white');
+                    darkBtn.classList.add('border-transparent', 'bg-slate-800/50', 'text-gray-400');
                 }
             }
 
@@ -992,20 +591,6 @@
                 window.location.href = 'analytics-login.html';
             }
         }
-
-        // Auto-save settings on change
-        document.addEventListener('DOMContentLoaded', () => {
-            const inputs = document.querySelectorAll('input, select, textarea');
-            inputs.forEach(input => {
-                input.addEventListener('change', () => {
-                    // Auto-save after 1 second of inactivity
-                    clearTimeout(window.autoSaveTimeout);
-                    window.autoSaveTimeout = setTimeout(() => {
-                        settingsManager.saveSettings();
-                    }, 1000);
-                });
-            });
-        });
     </script>
     <!-- Load shared particles initializer -->
     <script src="assets/particles-init.js"></script>
@@ -1013,5 +598,3 @@
     <script src="assets/chatbot.js"></script>
 </body>
 </html>
-
-

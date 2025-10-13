@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cases - SmartSOC IRS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="stylesheet" href="assets/shared-buttons.css">
     <link rel="stylesheet" href="assets/chatbot.css">
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%); color: #d1d5db; }
         .card { background: rgba(31,41,55,0.8); backdrop-filter: blur(10px); border: 1px solid rgba(55,65,81,0.3); border-radius: 0.75rem; }
@@ -99,6 +106,10 @@
                 <li><a href="cases.html" class="group relative flex items-center gap-3 rounded-md px-3 py-2 text-white bg-slate-800 transition-colors" style="box-shadow: inset 3px 0 0 0 rgb(99 102 241)"><i class="fas fa-fire w-5"></i><span class="truncate text-sm font-medium">Incidents</span></a></li>
                 <li><a href="threat-intel.html" class="group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors"><i class="fas fa-brain w-5 text-slate-400"></i><span class="truncate text-sm font-medium">Threat Intel</span></a></li>
                 <li><a href="analytics.html" class="group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors"><i class="fas fa-chart-line w-5 text-slate-400"></i><span class="truncate text-sm font-medium">Analytics</span></a></li>
+                <li><a href="soc-graph.html" class="group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors"><i class="fas fa-project-diagram w-5 text-slate-400"></i><span class="truncate text-sm font-medium">SOC Threat Graph</span></a></li>
+                <li><a href="soc-explorer.html" class="group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors"><i class="fas fa-database w-5 text-slate-400"></i><span class="truncate text-sm font-medium">SOC Entity Explorer</span></a></li>
+                <li><a href="soc-rules.html" class="group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors"><i class="fas fa-list-check w-5 text-slate-400"></i><span class="truncate text-sm font-medium">SOC Model Rules</span></a></li>
+                
                 <li><a href="playbooks.html" class="group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors"><i class="fas fa-diagram-project w-5 text-slate-400"></i><span class="truncate text-sm font-medium">Automation Playbooks</span></a></li>
                 <li><a href="assets.html" class="group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors"><i class="fas fa-users w-5 text-slate-400"></i><span class="truncate text-sm font-medium">Users</span></a></li>
                 <li><a href="settings.html" class="group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors"><i class="fas fa-gear w-5 text-slate-400"></i><span class="truncate text-sm font-medium">Settings</span></a></li>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart SOC - Model Rules</title>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/shared-buttons.css">
+    <link rel="stylesheet" href="assets/chatbot.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f0f23 0%, #1e1e3f 25%, #2d1b69 50%, #7c3aed 75%, #a855f7 100%); color: #f3f4f6; }
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; opacity: 0.6; }
+        .card { background: rgba(30,41,59,0.9); backdrop-filter: blur(15px); border: 1px solid rgba(139,92,246,0.4); border-radius: 1rem; box-shadow: 0 12px 40px rgba(139,92,246,0.2), inset 0 1px 0 rgba(255,255,255,0.1); }
+        .embed-frame { width: 100%; height: calc(100vh - 180px); border: 1px solid rgba(139,92,246,0.4); border-radius: 1rem; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .vibrant-border { border-color: rgba(168,85,247,0.6); }
+        .glow-effect { box-shadow: 0 0 20px rgba(139,92,246,0.3); }
+        .metric-card { transition: all 0.3s ease; }
+        .metric-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 60px rgba(139,92,246,0.3); }
+    </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-8">
+    <button id="sidebar-mobile-toggle" class="lg:hidden fixed top-3 left-3 z-50 inline-flex items-center justify-center rounded-md p-2 text-slate-200 bg-slate-900/90 border border-slate-800 hover:bg-slate-800 transition" aria-controls="sidebar" aria-expanded="false" aria-label="Open sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div id="sidebar-overlay" class="hidden lg:hidden fixed inset-0 z-40 bg-black/40"></div>
+    <aside id="sidebar" class="fixed z-50 top-0 left-0 h-screen bg-slate-900 text-slate-200 border-r border-slate-800 transform -translate-x-full lg:translate-x-0" role="dialog" aria-modal="true" aria-label="Sidebar">
+        <div class="flex items-center justify-between px-4 py-4 border-b border-slate-800">
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold shadow-inner">◆</div>
+            </div>
+            <button id="sidebar-collapse-toggle" class="hidden lg:inline-flex items-center justify-center rounded-md p-2 text-slate-300 hover:bg-slate-800 transition" aria-controls="sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+                <i id="sidebar-collapse-icon-top" class="fas fa-angle-left"></i>
+            </button>
+            <button id="sidebar-close" class="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-300 hover:bg-slate-800 transition" aria-label="Close sidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="px-2 py-3 overflow-y-auto h-[calc(100vh-3.25rem)]">
+            <ul class="space-y-1">
+                <li><a href="index.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-gauge-high w-5"></i><span class="truncate text-sm font-medium">Dashboard</span></a></li>
+                <li><a href="threat-detection.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-triangle-exclamation w-5"></i><span class="truncate text-sm font-medium">Threat Detection</span></a></li>
+                <li><a href="cases.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-fire w-5"></i><span class="truncate text-sm font-medium">Incidents</span></a></li>
+                <li><a href="threat-intel.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-brain w-5"></i><span class="truncate text-sm font-medium">Threat Intel</span></a></li>
+                <li><a href="analytics.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-chart-line w-5"></i><span class="truncate text-sm font-medium">Analytics</span></a></li>
+                <li><a href="soc-graph.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-project-diagram w-5"></i><span class="truncate text-sm font-medium">SOC Threat Graph</span></a></li>
+                <li><a href="soc-explorer.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-database w-5"></i><span class="truncate text-sm font-medium">SOC Entity Explorer</span></a></li>
+                <li><a href="soc-rules.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-list-check w-5"></i><span class="truncate text-sm font-medium">SOC Model Rules</span></a></li>
+                <li><a href="playbooks.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-diagram-project w-5"></i><span class="truncate text-sm font-medium">Automation Playbooks</span></a></li>
+                <li><a href="assets.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-users w-5"></i><span class="truncate text-sm font-medium">Users</span></a></li>
+                <li><a href="settings.html" class="sidebar-link group relative flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors"><i class="sidebar-icon fas fa-gear w-5"></i><span class="truncate text-sm font-medium">Settings</span></a></li>
+            </ul>
+        </nav>
+        <div class="hidden lg:flex absolute bottom-0 left-0 right-0 p-2 border-t border-slate-800">
+            <button id="sidebar-collapse-toggle-bottom" class="w-full inline-flex items-center justify-center gap-2 rounded-md px-2 py-2 text-xs text-slate-300 hover:bg-slate-800 transition" aria-controls="sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+                <i id="sidebar-collapse-icon-bottom" class="fas fa-angle-left"></i>
+            </button>
+        </div>
+    </aside>
+    <div id="particles-js"></div>
+    <div id="main-container" class="max-w-7xl mx-auto relative z-10">
+        <header class="flex justify-between items-center mb-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-list-check text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-white">SOC Model Rules</h1>
+                    <div class="text-sm text-gray-400">Configure and manage detection logic</div>
+                </div>
+            </div>
+            <a href="index.html" class="text-sm text-slate-300 hover:underline">Back to Dashboard</a>
+        </header>
+        <main class="space-y-8">
+            <!-- Rules Management Toolbar -->
+            <div class="card p-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 px-6 py-3 rounded-xl text-white text-sm font-semibold transition-all duration-200 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            <i class="fas fa-plus mr-2"></i>Create Rule
+                        </button>
+                        <button class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-6 py-3 rounded-xl text-white text-sm font-semibold transition-all duration-200 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            <i class="fas fa-upload mr-2"></i>Import Rules
+                        </button>
+                        <button class="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 px-6 py-3 rounded-xl text-white text-sm font-semibold transition-all duration-200 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            <i class="fas fa-copy mr-2"></i>Clone Rule
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <select class="bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>All Categories</option>
+                            <option>Network Security</option>
+                            <option>Access Control</option>
+                            <option>File Integrity</option>
+                            <option>Web Threats</option>
+                        </select>
+                        <button class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-white text-sm font-medium transition-colors duration-200">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rules Status Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="metric-card bg-gradient-to-br from-green-900/30 to-green-800/30 border border-green-500/50 p-6 rounded-2xl backdrop-blur-sm glow-effect">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-gradient-to-br from-green-500/30 to-green-600/30 rounded-xl glow-effect">
+                                <i class="fas fa-shield-alt text-green-300 text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-3xl font-bold text-green-300">47</div>
+                                <div class="text-xs text-green-200">+3 this week</div>
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Active Rules</h3>
+                        <p class="text-gray-300 text-sm">Detection rules enabled</p>
+                        <div class="mt-3">
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full glow-effect" style="width: 94%"></div>
+                            </div>
+                            <div class="text-xs text-gray-300 mt-1">94% effective</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 border border-yellow-500/50 p-6 rounded-2xl backdrop-blur-sm glow-effect">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-gradient-to-br from-yellow-500/30 to-yellow-600/30 rounded-xl glow-effect">
+                                <i class="fas fa-exclamation-triangle text-yellow-300 text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-3xl font-bold text-yellow-300">23</div>
+                                <div class="text-xs text-yellow-200">Today</div>
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Alerts Today</h3>
+                        <p class="text-gray-300 text-sm">Rules triggered</p>
+                        <div class="mt-3">
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 h-2 rounded-full glow-effect" style="width: 67%"></div>
+                            </div>
+                            <div class="text-xs text-gray-300 mt-1">67% actionable</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card bg-gradient-to-br from-blue-900/30 to-blue-800/30 border border-blue-500/50 p-6 rounded-2xl backdrop-blur-sm glow-effect">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-xl glow-effect">
+                                <i class="fas fa-clock text-blue-300 text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-3xl font-bold text-blue-300">2.3m</div>
+                                <div class="text-xs text-blue-200">Average</div>
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Response Time</h3>
+                        <p class="text-gray-300 text-sm">Alert to action</p>
+                        <div class="mt-3">
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full glow-effect" style="width: 89%"></div>
+                            </div>
+                            <div class="text-xs text-gray-300 mt-1">89% within SLA</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card bg-gradient-to-br from-red-900/30 to-red-800/30 border border-red-500/50 p-6 rounded-2xl backdrop-blur-sm glow-effect">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-gradient-to-br from-red-500/30 to-red-600/30 rounded-xl glow-effect">
+                                <i class="fas fa-times-circle text-red-300 text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-3xl font-bold text-red-300">3</div>
+                                <div class="text-xs text-red-200">This week</div>
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">False Positives</h3>
+                        <p class="text-gray-300 text-sm">Incorrect alerts</p>
+                        <div class="mt-3">
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full glow-effect" style="width: 6%"></div>
+                            </div>
+                            <div class="text-xs text-gray-300 mt-1">6% of total alerts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rules Management Interface -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Rules List -->
+                <div class="lg:col-span-2">
+                    <div class="card p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold text-white">Detection Rules</h3>
+                            <div class="flex items-center space-x-2">
+                                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded-lg text-white text-sm transition-colors duration-200">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded-lg text-white text-sm transition-colors duration-200">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded-lg text-white text-sm transition-colors duration-200">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Rule Item -->
+                            <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-200">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="relative">
+                                            <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                                <i class="fas fa-network-wired text-blue-400"></i>
+                                            </div>
+                                            <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-check text-xs text-white"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="text-white font-medium">Suspicious Network Traffic</div>
+                                            <div class="text-gray-400 text-sm">Network Security • ID: RULE-001</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs">Active</span>
+                                        <div class="flex items-center space-x-1">
+                                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                            <span class="text-xs text-gray-400">Running</span>
+                                        </div>
+                                        <button class="text-gray-400 hover:text-white transition-colors">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-sm text-gray-400">
+                                    <span>Triggers: 12 today</span>
+                                    <span>Last modified: 2 days ago</span>
+                                </div>
+                            </div>
+
+                            <!-- Rule Item -->
+                            <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-200">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-user-shield text-purple-400"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-white font-medium">Failed Login Attempts</div>
+                                            <div class="text-gray-400 text-sm">Access Control • ID: RULE-002</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs">Active</span>
+                                        <div class="flex items-center space-x-1">
+                                            <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                                            <span class="text-xs text-gray-400">High Load</span>
+                                        </div>
+                                        <button class="text-gray-400 hover:text-white transition-colors">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-sm text-gray-400">
+                                    <span>Triggers: 8 today</span>
+                                    <span>Last modified: 1 week ago</span>
+                                </div>
+                            </div>
+
+                            <!-- Rule Item -->
+                            <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-200">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-file-alt text-orange-400"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-white font-medium">File Integrity Monitor</div>
+                                            <div class="text-gray-400 text-sm">File Integrity • ID: RULE-003</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs">Testing</span>
+                                        <div class="flex items-center space-x-1">
+                                            <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
+                                            <span class="text-xs text-gray-400">Paused</span>
+                                        </div>
+                                        <button class="text-gray-400 hover:text-white transition-colors">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-sm text-gray-400">
+                                    <span>Triggers: 0 today</span>
+                                    <span>Last modified: 3 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="flex items-center justify-between mt-6">
+                            <div class="text-sm text-gray-400">Showing 1-10 of 47 rules</div>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded text-white text-sm transition-colors">Previous</button>
+                                <button class="px-3 py-1 bg-blue-600 rounded text-white text-sm">1</button>
+                                <button class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded text-white text-sm transition-colors">2</button>
+                                <button class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded text-white text-sm transition-colors">3</button>
+                                <button class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded text-white text-sm transition-colors">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rule Details & Controls -->
+                <div class="space-y-6">
+                    <!-- Rule Details -->
+                    <div class="card p-6">
+                        <h4 class="text-lg font-semibold text-white mb-4">Rule Details</h4>
+                        <div class="space-y-4">
+                            <div class="text-center py-8">
+                                <div class="w-16 h-16 bg-slate-700 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                    <i class="fas fa-cog text-2xl text-gray-400"></i>
+                                </div>
+                                <p class="text-gray-400">Select a rule to view details</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rule Categories -->
+                    <div class="card p-6">
+                        <h4 class="text-lg font-semibold text-white mb-4">Rule Categories</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-blue-900/20 border border-blue-700/30 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-network-wired text-blue-400 mr-3"></i>
+                                    <span class="text-white text-sm">Network Security</span>
+                                </div>
+                                <span class="text-sm text-blue-400 font-medium">12 rules</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-purple-900/20 border border-purple-700/30 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-shield text-purple-400 mr-3"></i>
+                                    <span class="text-white text-sm">Access Control</span>
+                                </div>
+                                <span class="text-sm text-purple-400 font-medium">8 rules</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-orange-900/20 border border-orange-700/30 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-alt text-orange-400 mr-3"></i>
+                                    <span class="text-white text-sm">File Integrity</span>
+                                </div>
+                                <span class="text-sm text-orange-400 font-medium">15 rules</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-red-900/20 border border-red-700/30 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-globe text-red-400 mr-3"></i>
+                                    <span class="text-white text-sm">Web Threats</span>
+                                </div>
+                                <span class="text-sm text-red-400 font-medium">12 rules</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Alerts -->
+                    <div class="card p-6">
+                        <h4 class="text-lg font-semibold text-white mb-4">Recent Alerts</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-900/10 border border-red-800/50 rounded-lg">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-red-400 font-medium text-sm">Suspicious Login</span>
+                                    <span class="text-xs text-gray-400">2 min ago</span>
+                                </div>
+                                <p class="text-sm text-gray-300">Multiple failed login attempts from IP 192.168.1.50</p>
+                            </div>
+                            <div class="p-3 bg-yellow-900/10 border border-yellow-800/50 rounded-lg">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-yellow-400 font-medium text-sm">Unusual Traffic</span>
+                                    <span class="text-xs text-gray-400">5 min ago</span>
+                                </div>
+                                <p class="text-sm text-gray-300">High bandwidth usage detected on server-03</p>
+                            </div>
+                            <div class="p-3 bg-blue-900/10 border border-blue-800/50 rounded-lg">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-blue-400 font-medium text-sm">Policy Violation</span>
+                                    <span class="text-xs text-gray-400">12 min ago</span>
+                                </div>
+                                <p class="text-sm text-gray-300">Unauthorized file access in restricted directory</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="assets/particles-init.js"></script>
+    <script src="assets/button-functionality.js"></script>
+
+    <script>
+        // Rules Management Functionality
+        (function(){
+            const createRuleBtn = document.querySelector('button[class*="from-green-600"]');
+            const importRulesBtn = document.querySelector('button[class*="from-blue-600"]');
+            const cloneRuleBtn = document.querySelector('button[class*="from-purple-600"]');
+            const categorySelect = document.querySelector('select');
+            const filterBtn = document.querySelector('button[class*="fa-filter"]');
+            const ruleItems = document.querySelectorAll('.bg-slate-800\\/50');
+            const paginationButtons = document.querySelectorAll('.flex.items-center.space-x-2 button');
+            const viewButtons = document.querySelectorAll('.bg-slate-700');
+
+            // Create rule
+            createRuleBtn.addEventListener('click', function() {
+                console.log('Opening create rule modal');
+                // Could open a modal to create new rule
+            });
+
+            // Import rules
+            importRulesBtn.addEventListener('click', function() {
+                console.log('Opening import rules modal');
+                // Could open file picker for rule import
+            });
+
+            // Clone rule
+            cloneRuleBtn.addEventListener('click', function() {
+                console.log('Opening clone rule modal');
+                // Could open modal to select rule to clone
+            });
+
+            // Category filter
+            categorySelect.addEventListener('change', function() {
+                const selectedCategory = this.value;
+                ruleItems.forEach(item => {
+                    if (selectedCategory === 'All Categories') {
+                        item.style.display = 'block';
+                    } else {
+                        const itemCategory = item.querySelector('.text-sm').textContent.split(' • ')[0];
+                        item.style.display = itemCategory.toLowerCase().includes(selectedCategory.toLowerCase()) ? 'block' : 'none';
+                    }
+                });
+                updatePagination();
+            });
+
+            // Filter button
+            filterBtn.addEventListener('click', function() {
+                console.log('Opening advanced filter modal');
+                // Could open advanced filter modal
+            });
+
+            // Rule item interactions
+            ruleItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active state from all items
+                    ruleItems.forEach(i => i.classList.remove('ring-2', 'ring-blue-500'));
+                    // Add active state to clicked item
+                    this.classList.add('ring-2', 'ring-blue-500');
+                    showRuleDetails(this);
+                });
+
+                // Ellipsis menu
+                const menuBtn = item.querySelector('.fa-ellipsis-v').parentElement;
+                menuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    console.log('Opening rule menu');
+                    // Could show context menu with edit/delete options
+                });
+            });
+
+            // Pagination
+            paginationButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.textContent === 'Previous' || this.textContent === 'Next') {
+                        console.log('Navigating:', this.textContent);
+                    } else {
+                        // Page number
+                        paginationButtons.forEach(btn => btn.classList.remove('bg-blue-600'));
+                        this.classList.add('bg-blue-600');
+                        loadPage(parseInt(this.textContent));
+                    }
+                });
+            });
+
+            // View toggle buttons
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    viewButtons.forEach(btn => btn.classList.remove('bg-slate-600'));
+                    this.classList.add('bg-slate-600');
+                    const viewType = this.querySelector('i').className.includes('fa-list') ? 'list' : 'grid';
+                    console.log('Switching to view:', viewType);
+                    // Could switch between list and grid views
+                });
+            });
+
+            function showRuleDetails(ruleItem) {
+                const detailsPanel = document.querySelector('.space-y-4');
+                const placeholder = detailsPanel.querySelector('.py-8');
+
+                if (placeholder) {
+                    placeholder.innerHTML = `
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-500/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-blue-400 text-2xl"></i>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-2">Suspicious Network Traffic</h4>
+                            <p class="text-gray-400 text-sm mb-4">RULE-001 • Network Security</p>
+                            <div class="text-left space-y-3">
+                                <div>
+                                    <span class="text-gray-400 text-xs">Description:</span>
+                                    <p class="text-white text-sm mt-1">Detects unusual network traffic patterns that may indicate malicious activity or data exfiltration attempts.</p>
+                                </div>
+                                <div>
+                                    <span class="text-gray-400 text-xs">Severity:</span>
+                                    <span class="text-yellow-400 text-sm ml-2">Medium</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-400 text-xs">Status:</span>
+                                    <span class="text-green-400 text-sm ml-2">Active</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-400 text-xs">Last Triggered:</span>
+                                    <span class="text-white text-sm ml-2">2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            function updatePagination() {
+                const visibleItems = Array.from(ruleItems).filter(item => item.style.display !== 'none');
+                const totalPages = Math.ceil(visibleItems.length / 10);
+                // Update pagination buttons based on visible items
+            }
+
+            function loadPage(pageNumber) {
+                console.log('Loading page:', pageNumber);
+                // Implement pagination logic
+            }
+        })();
+    </script>
+
+    <script>
+        (function markActiveLinks(){
+            const sidebar = document.getElementById('sidebar');
+            const links = sidebar.querySelectorAll('nav a');
+            const current = location.pathname.split('/').pop();
+            links.forEach(a => {
+                const file = (a.getAttribute('href')||'').split('/').pop();
+                const isActive = file === current;
+                a.classList.toggle('active', isActive);
+                if (isActive) {
+                    a.style.boxShadow = 'inset 3px 0 0 0 rgb(99 102 241)';
+                    a.classList.add('text-white');
+                    a.classList.add('bg-slate-800');
+                }
+            });
+        })();
+    </script>
+    <script>
+        (function(){
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const mobileToggle = document.getElementById('sidebar-mobile-toggle');
+            const closeBtn = document.getElementById('sidebar-close');
+            const collapseTop = document.getElementById('sidebar-collapse-toggle');
+            const collapseBottom = document.getElementById('sidebar-collapse-toggle-bottom');
+            let collapsed = false;
+            function applyCollapsedState(){
+                const isDesktop = window.innerWidth >= 1024;
+                if (isDesktop) {
+                    document.body.classList.add('desktop-with-sidebar');
+                    document.body.classList.toggle('desktop-with-sidebar-collapsed', collapsed);
+                    sidebar.classList.toggle('collapsed', collapsed);
+                    const topIcon = document.getElementById('sidebar-collapse-icon-top');
+                    const botIcon = document.getElementById('sidebar-collapse-icon-bottom');
+                    const expanded = !collapsed;
+                    collapseTop && collapseTop.setAttribute('aria-expanded', String(expanded));
+                    collapseBottom && collapseBottom.setAttribute('aria-expanded', String(expanded));
+                    if (topIcon) topIcon.className = expanded ? 'fas fa-angle-left' : 'fas fa-angle-right';
+                    if (botIcon) botIcon.className = expanded ? 'fas fa-angle-left' : 'fas fa-angle-right';
+                } else {
+                    document.body.classList.remove('desktop-with-sidebar');
+                    document.body.classList.remove('desktop-with-sidebar-collapsed');
+                    sidebar.classList.remove('collapsed');
+                }
+            }
+            function setCollapsed(next){ collapsed = next; applyCollapsedState(); }
+            function openMobile(){ sidebar.classList.remove('-translate-x-full'); overlay.classList.remove('hidden'); document.body.classList.add('sidebar-modal-open'); mobileToggle && mobileToggle.setAttribute('aria-expanded','true'); }
+            function closeMobile(){ sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); document.body.classList.remove('sidebar-modal-open'); mobileToggle && mobileToggle.setAttribute('aria-expanded','false'); }
+            mobileToggle && mobileToggle.addEventListener('click', openMobile);
+            overlay && overlay.addEventListener('click', closeMobile);
+            closeBtn && closeBtn.addEventListener('click', closeMobile);
+            function toggleCollapse(){ setCollapsed(!collapsed); }
+            collapseTop && collapseTop.addEventListener('click', toggleCollapse);
+            collapseBottom && collapseBottom.addEventListener('click', toggleCollapse);
+            window.addEventListener('resize', applyCollapsedState);
+            applyCollapsedState();
+        })();
+    </script>
+</body>
+</html>
+
+
