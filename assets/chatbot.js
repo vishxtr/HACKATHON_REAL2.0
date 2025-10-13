@@ -1,7 +1,7 @@
 // PhishGuard AI Chatbot Component
 // Reusable chatbot functionality for all pages
 
-class PhishGuard AIChatbot {
+class PhishGuardAIChatbot {
     constructor() {
         this.isInitialized = false;
         this.chatbotHistory = [];
@@ -417,10 +417,10 @@ class PhishGuard AIChatbot {
 
 // Initialize chatbot when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    window.smartsocChatbot = new PhishGuard AIChatbot();
+    window.smartsocChatbot = new PhishGuardAIChatbot();
 });
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = PhishGuard AIChatbot;
+    module.exports = PhishGuardAIChatbot;
 }
