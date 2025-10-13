@@ -7,7 +7,7 @@ class PhishGuardAIChatbot {
         this.chatbotHistory = [];
         this.chatbotBusy = false;
         this.CHAT_HISTORY_KEY = 'smartsoc_chat_history_v1';
-        this.GROQ_API_KEY = typeof window.GROQ_API_KEY !== 'undefined' ? window.GROQ_API_KEY : 'YOUR_API_KEY_HERE';
+        this.GROQ_API_KEY = window.GROQ_API_KEY || 'YOUR_API_KEY_HERE';
 
         // Initialize immediately since API key is now set directly
         this.init();
