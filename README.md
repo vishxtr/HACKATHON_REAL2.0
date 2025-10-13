@@ -1,8 +1,8 @@
-# SmartSOC IR - AI-Powered Security Operations Center
+# PhishGuard AI IR - AI-Powered Security Operations Center
 
 ## 🚀 Project Overview
 
-SmartSOC IR is a comprehensive, hackathon-ready security operations center dashboard that showcases advanced AI-powered threat detection, real-time analytics, and automated incident response capabilities.
+PhishGuard AI IR is a comprehensive, hackathon-ready security operations center dashboard that showcases advanced AI-powered threat detection, real-time analytics, and automated incident response capabilities.
 
 ## ✨ Features
 

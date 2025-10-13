@@ -1,4 +1,4 @@
-# 🚀 SmartSOC IR - Hackathon Project Overview
+# 🚀 PhishGuard AI IR - Hackathon Project Overview
 
 ## 📋 Project Summary
 
@@ -32,7 +32,7 @@ Your hackathon project has been **significantly enhanced** and is now **hackatho
 ### ✅ **Navigation System**
 - **Seamless Navigation**: All pages linked together
 - **Consistent Design**: Unified color scheme and typography
-- **Professional Branding**: SmartSOC IR identity throughout
+- **Professional Branding**: PhishGuard AI IR identity throughout
 
 ## 🏆 **Hackathon Presentation Ready**
 

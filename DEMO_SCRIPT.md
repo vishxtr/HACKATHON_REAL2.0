@@ -1,4 +1,4 @@
-# 🚀 SmartSOC IR - Hackathon Demo Script
+# 🚀 PhishGuard AI IR - Hackathon Demo Script
 
 ## 📋 **DEMO OVERVIEW**
 
@@ -14,7 +14,7 @@
 **Start with:** `landing.html`
 
 **Script:**
-> "Good [morning/afternoon]! I'm excited to present SmartSOC IR - an AI-powered Security Operations Center that revolutionizes how organizations detect, analyze, and respond to cyber threats in real-time."
+> "Good [morning/afternoon]! I'm excited to present PhishGuard AI IR - an AI-powered Security Operations Center that revolutionizes how organizations detect, analyze, and respond to cyber threats in real-time."
 
 **Key Points:**
 - Professional landing page with modern design
@@ -147,7 +147,7 @@
 **Navigate back to:** `index.html`
 
 **Script:**
-> "SmartSOC IR represents the future of cybersecurity operations - combining AI-powered threat detection, automated response, and interactive training in a single, comprehensive platform. It's designed to scale from small teams to enterprise environments while maintaining the highest security standards."
+> "PhishGuard AI IR represents the future of cybersecurity operations - combining AI-powered threat detection, automated response, and interactive training in a single, comprehensive platform. It's designed to scale from small teams to enterprise environments while maintaining the highest security standards."
 
 **Key Points:**
 - Scalable architecture
@@ -270,7 +270,7 @@
 
 ## 🚀 **FINAL MESSAGE**
 
-> "SmartSOC IR isn't just a demo - it's a production-ready security operations center that combines the latest in AI, real-time analytics, and interactive training. It's designed to help organizations stay ahead of evolving cyber threats while training their teams to respond effectively. Thank you for your time, and I'm happy to answer any questions!"
+> "PhishGuard AI IR isn't just a demo - it's a production-ready security operations center that combines the latest in AI, real-time analytics, and interactive training. It's designed to help organizations stay ahead of evolving cyber threats while training their teams to respond effectively. Thank you for your time, and I'm happy to answer any questions!"
 
 ---
 

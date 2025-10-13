@@ -267,7 +267,7 @@
                         <i class="fas fa-shield-alt text-white text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-2xl sm:text-3xl font-bold text-white">SmartSOC IRS</h1>
+                        <h1 class="text-2xl sm:text-3xl font-bold text-white">PhishGuard AI IRS</h1>
                         <p class="text-sm text-gray-400">AI-Powered Security Operations Center</p>
                     </div>
                 </div>
@@ -857,9 +857,9 @@
                     const alertsSummary = (Array.isArray(alerts) ? alerts.slice(0, 3) : []).map(a => `#${a.id} ${a.type} (${a.severity}) - ${a.status}`).join(' | ');
                     const counts = `Events=${typeof totalEvents !== 'undefined' ? totalEvents : 0}, High=${typeof highAlerts !== 'undefined' ? highAlerts : 0}, Medium=${typeof mediumAlerts !== 'undefined' ? mediumAlerts : 0}, Low=${typeof lowAlerts !== 'undefined' ? lowAlerts : 0}`;
                     const now = new Date().toLocaleString();
-                    return `Current SmartSOC status as of ${now}: ${counts}. Recent alerts: ${alertsSummary || 'none'}.`;
+                    return `Current PhishGuard AI status as of ${now}: ${counts}. Recent alerts: ${alertsSummary || 'none'}.`;
                 } catch (_) {
-                    return 'Current SmartSOC status: metrics unavailable.';
+                    return 'Current PhishGuard AI status: metrics unavailable.';
                 }
             }
 
@@ -875,7 +875,7 @@
                 if (chatbotBusy) return;
                 chatbotBusy = true;
 
-                const systemPrompt = 'You are the SmartSOC Assistant embedded in the Smart SOC Incident Response System (SmartSOC IRS). You help security analysts with SOC operations: interpreting alerts, incident triage, phishing analysis, threat intelligence, and safe remediation guidance. If asked about yourself, say you are the SmartSOC Assistant integrated into this app and currently powered by Groq. Respond in clean, ChatGPT-style markdown with short headings (##/###), bold labels, concise bullet points, and numbered steps for playbooks. Keep responses concise, accurate, and action-oriented. Avoid giving instructions that could enable harm. When information is missing, ask a brief clarifying question before proceeding. Where helpful, include concrete next steps.';
+                const systemPrompt = 'You are the PhishGuard AI Assistant embedded in the Smart SOC Incident Response System (PhishGuard AI IRS). You help security analysts with SOC operations: interpreting alerts, incident triage, phishing analysis, threat intelligence, and safe remediation guidance. If asked about yourself, say you are the PhishGuard AI Assistant integrated into this app and currently powered by Groq. Respond in clean, ChatGPT-style markdown with short headings (##/###), bold labels, concise bullet points, and numbered steps for playbooks. Keep responses concise, accurate, and action-oriented. Avoid giving instructions that could enable harm. When information is missing, ask a brief clarifying question before proceeding. Where helpful, include concrete next steps.';
                 const maxTurns = 10;
                 const recentTurns = chatbotHistory.slice(-maxTurns).map(m => ({ role: m.role === 'assistant' ? 'assistant' : m.role, content: m.content }));
                 const messages = [

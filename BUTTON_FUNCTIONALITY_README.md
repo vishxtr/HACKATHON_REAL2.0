@@ -1,10 +1,10 @@
-# SmartSOC Button Functionality Guide
+# PhishGuard AI Button Functionality Guide
 
-This document outlines all the interactive button functionality implemented across the SmartSOC project.
+This document outlines all the interactive button functionality implemented across the PhishGuard AI project.
 
 ## 🚀 Overview
 
-All buttons in the SmartSOC project are now fully functional with interactive features, visual feedback, and proper error handling. The functionality is implemented through a centralized JavaScript system that can be used across all pages.
+All buttons in the PhishGuard AI project are now fully functional with interactive features, visual feedback, and proper error handling. The functionality is implemented through a centralized JavaScript system that can be used across all pages.
 
 ## 📁 Files Structure
 
@@ -192,7 +192,7 @@ assets/
 The button functionality is implemented using a class-based approach:
 
 ```javascript
-class SmartSOCButtons {
+class PhishGuard AIButtons {
     constructor() {
         this.init();
     }

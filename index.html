@@ -294,7 +294,7 @@
     </style>
 </head>
 <body class="p-4 sm:p-6 lg:p-8">
-    <!-- Sidebar: SmartSOC Pro -->
+    <!-- Sidebar: PhishGuard AI Pro -->
     <button id="sidebar-mobile-toggle" class="lg:hidden fixed top-3 left-3 z-50 inline-flex items-center justify-center rounded-md p-2 text-slate-200 bg-slate-900/90 border border-slate-800 hover:bg-slate-800 transition" aria-controls="sidebar" aria-expanded="false" aria-label="Open sidebar">
         <i class="fas fa-bars"></i>
     </button>
@@ -306,7 +306,7 @@
         <div class="flex items-center justify-between px-4 py-4 border-b border-slate-800">
             <div class="flex items-center gap-3 min-w-0">
                 <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold shadow-inner">◆</div>
-                <span class="brand-text text-sm font-semibold truncate hidden sm:block">SmartSOC</span>
+                <span class="brand-text text-sm font-semibold truncate hidden sm:block">PhishGuard AI</span>
             </div>
             <button id="sidebar-collapse-toggle" class="hidden lg:inline-flex items-center justify-center rounded-md p-2 text-slate-300 hover:bg-slate-800 transition" aria-controls="sidebar" aria-expanded="true" aria-label="Collapse sidebar">
                 <i id="sidebar-collapse-icon-top" class="fas fa-angle-left"></i>
@@ -407,7 +407,7 @@
                         <i class="fas fa-shield-alt text-white text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-2xl sm:text-3xl font-bold text-white">SmartSOC IRS</h1>
+                        <h1 class="text-2xl sm:text-3xl font-bold text-white">PhishGuard AI IRS</h1>
                         <p class="text-sm text-gray-400">AI-Powered Security Operations Center</p>
                     </div>
                 </div>
@@ -1078,9 +1078,9 @@
                     const alertsSummary = (Array.isArray(alerts) ? alerts.slice(0, 3) : []).map(a => `#${a.id} ${a.type} (${a.severity}) - ${a.status}`).join(' | ');
                     const counts = `Events=${typeof totalEvents !== 'undefined' ? totalEvents : 0}, High=${typeof highAlerts !== 'undefined' ? highAlerts : 0}, Medium=${typeof mediumAlerts !== 'undefined' ? mediumAlerts : 0}, Low=${typeof lowAlerts !== 'undefined' ? lowAlerts : 0}`;
                     const now = new Date().toLocaleString();
-                    return `Current SmartSOC status as of ${now}: ${counts}. Recent alerts: ${alertsSummary || 'none'}.`;
+                    return `Current PhishGuard AI status as of ${now}: ${counts}. Recent alerts: ${alertsSummary || 'none'}.`;
                 } catch (_) {
-                    return 'Current SmartSOC status: metrics unavailable.';
+                    return 'Current PhishGuard AI status: metrics unavailable.';
                 }
             }
 
@@ -1096,7 +1096,7 @@
                 if (chatbotBusy) return;
                 chatbotBusy = true;
 
-                const systemPrompt = 'You are the SmartSOC Assistant embedded in the Smart SOC Incident Response System (SmartSOC IRS). You help security analysts with SOC operations: interpreting alerts, incident triage, phishing analysis, threat intelligence, and safe remediation guidance. If asked about yourself, say you are the SmartSOC Assistant integrated into this app and currently powered by Groq. Respond in clean, ChatGPT-style markdown with short headings (##/###), bold labels, concise bullet points, and numbered steps for playbooks. Keep responses concise, accurate, and action-oriented. Avoid giving instructions that could enable harm. When information is missing, ask a brief clarifying question before proceeding. Where helpful, include concrete next steps.';
+                const systemPrompt = 'You are the PhishGuard AI Assistant embedded in the Smart SOC Incident Response System (PhishGuard AI IRS). You help security analysts with SOC operations: interpreting alerts, incident triage, phishing analysis, threat intelligence, and safe remediation guidance. If asked about yourself, say you are the PhishGuard AI Assistant integrated into this app and currently powered by Groq. Respond in clean, ChatGPT-style markdown with short headings (##/###), bold labels, concise bullet points, and numbered steps for playbooks. Keep responses concise, accurate, and action-oriented. Avoid giving instructions that could enable harm. When information is missing, ask a brief clarifying question before proceeding. Where helpful, include concrete next steps.';
                 const maxTurns = 10;
                 const recentTurns = chatbotHistory.slice(-maxTurns).map(m => ({ role: m.role === 'assistant' ? 'assistant' : m.role, content: m.content }));
                 const messages = [

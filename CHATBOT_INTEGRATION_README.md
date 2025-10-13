@@ -1,8 +1,8 @@
-# SmartSOC Chatbot Integration
+# PhishGuard AI Chatbot Integration
 
 ## Overview
 
-The SmartSOC Chatbot has been successfully integrated across all pages of the SmartSOC IRS (Incident Response System) project. This provides a consistent, AI-powered assistant experience throughout the entire application.
+The PhishGuard AI Chatbot has been successfully integrated across all pages of the PhishGuard AI IRS (Incident Response System) project. This provides a consistent, AI-powered assistant experience throughout the entire application.
 
 ## Files Created
 
@@ -170,7 +170,7 @@ The chatbot automatically appears on all pages. Users can:
 
 ### Debug Mode
 Enable debug logging by opening browser console and looking for:
-- `SmartSOC Chatbot initialized`
+- `PhishGuard AI Chatbot initialized`
 - API request/response logs
 - Error messages
 
@@ -213,4 +213,4 @@ For issues or questions regarding the chatbot integration:
 
 **Last Updated**: December 2024
 **Version**: 1.0.0
-**Maintainer**: SmartSOC Development Team
+**Maintainer**: PhishGuard AI Development Team

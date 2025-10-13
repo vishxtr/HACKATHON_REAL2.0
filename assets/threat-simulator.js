@@ -1,5 +1,5 @@
 /**
- * SmartSOC Live Threat Simulation Engine
+ * PhishGuard AI Live Threat Simulation Engine
  * Provides realistic threat simulation for hackathon demonstration
  */
 

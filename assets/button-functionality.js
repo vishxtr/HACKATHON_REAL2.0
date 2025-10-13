@@ -1,7 +1,7 @@
-// Global Button Functionality for SmartSOC Project
+// Global Button Functionality for PhishGuard AI Project
 // This file provides interactive functionality for all buttons across the project
 
-class SmartSOCButtons {
+class PhishGuard AIButtons {
     constructor() {
         this.init();
     }
@@ -450,7 +450,7 @@ class SmartSOCButtons {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new SmartSOCButtons();
+    new PhishGuard AIButtons();
 });
 
 // Add CSS for animations

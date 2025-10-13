@@ -2,7 +2,7 @@
 
 ## 🛡️ Overview
 
-This document describes the **simulated, modular, non-breaking "Real-time Phishing Detection & Prevention"** feature added to the SmartSOC IR project. This feature provides comprehensive phishing detection capabilities using simulated AI models for hackathon demonstration purposes.
+This document describes the **simulated, modular, non-breaking "Real-time Phishing Detection & Prevention"** feature added to the PhishGuard AI IR project. This feature provides comprehensive phishing detection capabilities using simulated AI models for hackathon demonstration purposes.
 
 ## ⚠️ Important Notice
 

@@ -1,7 +1,7 @@
-// SmartSOC Chatbot Component
+// PhishGuard AI Chatbot Component
 // Reusable chatbot functionality for all pages
 
-class SmartSOCChatbot {
+class PhishGuard AIChatbot {
     constructor() {
         this.isInitialized = false;
         this.chatbotHistory = [];
@@ -27,7 +27,7 @@ class SmartSOCChatbot {
         if (document.getElementById('chatbot-container')) return;
 
         const chatbotHTML = `
-            <!-- SmartSOC Chatbot -->
+            <!-- PhishGuard AI Chatbot -->
             <div id="chatbot-container" class="fixed bottom-6 right-6 z-50">
                 <button id="chatbot-toggle" class="bg-blue-600 text-white rounded-full p-4 shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500 transition-transform transform hover:scale-110">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -40,7 +40,7 @@ class SmartSOCChatbot {
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                                <h3 class="font-semibold text-white">SmartSOC Assistant</h3>
+                                <h3 class="font-semibold text-white">PhishGuard AI Assistant</h3>
                             </div>
                             <div class="flex items-center space-x-2">
                                 <div class="flex items-center space-x-2 text-xs">
@@ -54,7 +54,7 @@ class SmartSOCChatbot {
                     </div>
                     <div id="chatbot-messages" class="p-4 h-64 overflow-y-auto">
                         <div class="text-sm p-2 bg-blue-900/50 rounded-lg text-gray-300 mb-2">
-                            Hi! I'm your SmartSOC Assistant. I can help you with:
+                            Hi! I'm your PhishGuard AI Assistant. I can help you with:
                             <ul class="mt-2 space-y-1 text-xs">
                                 <li>• Incident analysis and triage</li>
                                 <li>• Threat intelligence queries</li>
@@ -253,9 +253,9 @@ class SmartSOCChatbot {
             const pageContext = this.getPageContext(currentPage);
             
             const now = new Date().toLocaleString();
-            return `Current SmartSOC context as of ${now}: ${pageContext}`;
+            return `Current PhishGuard AI context as of ${now}: ${pageContext}`;
         } catch (error) {
-            return 'Current SmartSOC context: metrics unavailable.';
+            return 'Current PhishGuard AI context: metrics unavailable.';
         }
     }
 
@@ -278,7 +278,7 @@ class SmartSOCChatbot {
         if (this.chatbotBusy) return;
         this.chatbotBusy = true;
 
-        const systemPrompt = 'You are the SmartSOC Assistant embedded in the Smart SOC Incident Response System (SmartSOC IRS). You help security analysts with SOC operations: interpreting alerts, incident triage, phishing analysis, threat intelligence, and safe remediation guidance. If asked about yourself, say you are the SmartSOC Assistant integrated into this app and currently powered by Groq. Respond in clean, ChatGPT-style markdown with short headings (##/###), bold labels, concise bullet points, and numbered steps for playbooks. Keep responses concise, accurate, and action-oriented. Avoid giving instructions that could enable harm. When information is missing, ask a brief clarifying question before proceeding. Where helpful, include concrete next steps.';
+        const systemPrompt = 'You are the PhishGuard AI Assistant embedded in the Smart SOC Incident Response System (PhishGuard AI IRS). You help security analysts with SOC operations: interpreting alerts, incident triage, phishing analysis, threat intelligence, and safe remediation guidance. If asked about yourself, say you are the PhishGuard AI Assistant integrated into this app and currently powered by Groq. Respond in clean, ChatGPT-style markdown with short headings (##/###), bold labels, concise bullet points, and numbered steps for playbooks. Keep responses concise, accurate, and action-oriented. Avoid giving instructions that could enable harm. When information is missing, ask a brief clarifying question before proceeding. Where helpful, include concrete next steps.';
         
         const maxTurns = 10;
         const recentTurns = this.chatbotHistory.slice(-maxTurns).map(m => ({ 
@@ -417,10 +417,10 @@ class SmartSOCChatbot {
 
 // Initialize chatbot when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    window.smartsocChatbot = new SmartSOCChatbot();
+    window.smartsocChatbot = new PhishGuard AIChatbot();
 });
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = SmartSOCChatbot;
+    module.exports = PhishGuard AIChatbot;
 }

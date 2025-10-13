@@ -1,8 +1,8 @@
-# 🚀 SmartSOC IR - Showcase Features
+# 🚀 PhishGuard AI IR - Showcase Features
 
 ## 🎯 **HACKATHON-READY FEATURES**
 
-Your SmartSOC project now includes comprehensive simulated features that will impress hackathon judges and demonstrate real-world cybersecurity capabilities.
+Your PhishGuard AI project now includes comprehensive simulated features that will impress hackathon judges and demonstrate real-world cybersecurity capabilities.
 
 ---
 
@@ -248,7 +248,7 @@ Your SmartSOC project now includes comprehensive simulated features that will im
 
 ## 🎯 **SUCCESS METRICS**
 
-Your SmartSOC project now includes:
+Your PhishGuard AI project now includes:
 - ✅ **5+ Interactive Pages** with comprehensive functionality
 - ✅ **Real-time Threat Simulation** with live data feeds
 - ✅ **3 Interactive Scenarios** for incident response training
