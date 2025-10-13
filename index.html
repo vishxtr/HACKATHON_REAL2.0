@@ -1107,7 +1107,7 @@
                 ];
 
                 try {
-                    const GROQ_API_KEY = 'YOUR_API_KEY_HERE';
+            const GROQ_API_KEY = typeof window.GROQ_API_KEY !== 'undefined' ? window.GROQ_API_KEY : 'YOUR_API_KEY_HERE';
                     const url = 'https://api.groq.com/openai/v1/chat/completions';
                     addTyping();
                     const resp = await fetch(url, {
@@ -1761,6 +1761,7 @@
             }, 2000); // Process security events every 2 seconds automatically
         });
     </script>
+    <script src="load-env.js"></script>
     <script src="assets/button-functionality.js"></script>
     <script src="assets/chatbot.js"></script>
 </body>
